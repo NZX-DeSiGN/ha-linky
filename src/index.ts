@@ -31,9 +31,10 @@ async function main() {
   }
 
   async function init() {
-    info(`[${dayjs().format('DD/MM HH:mm')}] New PRM detected, importing as much historical data as possible`);
-    const energyData = await consumptionClient.getEnergyData(null);
-    await haClient.saveStatistics(userConfig.consumption.prm, userConfig.consumption.name, energyData);
+    info(`[${dayjs().format('DD/MM HH:mm')}] New PRM detected, importing CSV historical data`);
+
+    const csvEnergyData = await consumptionClient.getCsvEnergyData();
+    await haClient.saveStatistics(userConfig.consumption.prm, userConfig.consumption.name, csvEnergyData);
   }
   async function sync() {
     info(`[${dayjs().format('DD/MM HH:mm')}] Data synchronization started`);
